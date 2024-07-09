@@ -28,7 +28,7 @@ export const observerOne = new Observer<ObserverOneType>({
 
 function App() {
   const { count, setCount } = useObserver(0);
-  const { str } = useObserver("qqqq");
+  const { str } = useObserver("qqqq")
 
 
 
@@ -66,8 +66,11 @@ function App() {
   return (
     <>
     {/* use Observer package */}
-    <Button sx={{display:"flex", justifyContent:"center"}} onClick={()=> setCount(count-1)}> {count}</Button>
-    <Button sx={{display:"flex", justifyContent:"center"}}> {str}</Button>
+    <Stack justifyContent={'center'} direction={'row'}>
+      <Button onClick={()=> setCount(count-1)}> {count}</Button>
+      <Button sx={{display:"flex", justifyContent:"center"}}> {str}</Button>
+    </Stack>
+
 
     <BasicTable column={columns}/>
 

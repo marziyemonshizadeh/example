@@ -1,6 +1,6 @@
 import { Grid } from '@mui/material';
 import { Item } from '../../style';
-import { observer, useObserver } from 'rosma';
+import {  useObserver } from 'rosma';
 import { observerOne, ObserverOneType } from '../../App';
 
 type Props = {}
