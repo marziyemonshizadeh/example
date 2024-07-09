@@ -70,7 +70,7 @@ export default function BasicTable<T>({column}:Props<T>) {
 
   return (
    <TableContainer sx={{display:'grid',placeItems:'center'}} component={Paper}>
-      <Table sx={{ maxWidth: 650, border:"1px solid" }} aria-label="simple table">
+      <Table sx={{ maxWidth: '100%', border:"1px solid" }} aria-label="simple table">
         <TableHead>
           {table.getHeaderGroups().map(headerGroup => (
             <TableRow key={headerGroup.id}>

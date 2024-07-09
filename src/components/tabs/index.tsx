@@ -3,6 +3,11 @@ import Tabs from '@mui/material/Tabs';
 import Tab from '@mui/material/Tab';
 import Box from '@mui/material/Box';
 import TextField from '@mui/material/TextField';
+import BasicTable from '../table';
+import { ColumnDef } from '@tanstack/react-table';
+import { Button } from '@mui/material';
+import Form from '../Form';
+
 interface TabPanelProps {
   children?: React.ReactNode;
   index: number;
@@ -20,7 +25,7 @@ function CustomTabPanel(props: TabPanelProps) {
       aria-labelledby={`simple-tab-${index}`}
       {...other}
     >
-      {value === index && <Box sx={{ p: 3 }}>{children}</Box>}
+      {value === index && <Box sx={{paddingY:"12px"}}>{children}</Box>}
     </div>
   );
 }
@@ -36,6 +41,44 @@ export default function BasicTabs() {
   const handleChange2 = (event: React.SyntheticEvent, newValue: number) => {
     setValueTwo(newValue);
   };
+  type DataType ={
+    firstName: string;
+    lastName: string;
+    age: number;
+    visits: number;
+    status: string;
+    progress: number;
+  }
+  const columns = React.useMemo<ColumnDef<DataType, any>[]>(
+    () => [
+    {
+      accessorFn:(row)=>row.firstName,
+      header:"firstName"
+    },
+    {
+      accessorFn:(row)=>row.lastName,
+      header:"lastName"
+    },
+    {
+      accessorFn:(row)=>row.age,
+      header:"age"
+    },
+    {
+      accessorFn:(row)=>row.progress,
+      header:"progress"
+    },
+    {
+      accessorFn:(row)=>row.status,
+      header:"status"
+    },
+    {
+      accessorFn:(row)=>row.visits,
+      header:"visits",
+      cell: (cell)=> cell.getValue() === 100 ? <Button>{cell.getValue()}</Button> : cell.getValue()
+    },
+    ],
+    []
+  );
 
   return (
     <Box sx={{ width: '100%'}}>
@@ -46,8 +89,8 @@ export default function BasicTabs() {
           <Tab label="Item Three" />
         </Tabs>
       </Box>
+      
       <CustomTabPanel  value={value} index={0}>
-             Item One 
             <Box sx={{ width: '100%'}}>
               <Box sx={{ borderBottom: 1, borderColor: 'divider' }}>
                 <Tabs value={valueTwo} onChange={handleChange2} aria-label="basic tabs example">
@@ -74,18 +117,19 @@ export default function BasicTabs() {
               </Box>
               </CustomTabPanel>
               <CustomTabPanel value={valueTwo} index={1}>
-                Item Two
+                Item Two sub tab
               </CustomTabPanel>
               <CustomTabPanel value={valueTwo} index={2}>
-                Item Three
+                Item Three sub tab
               </CustomTabPanel>
             </Box>
+            Item One sub tab
       </CustomTabPanel>
       <CustomTabPanel value={value} index={1}>
-        Item Two
+          <BasicTable column={columns}/>
       </CustomTabPanel>
       <CustomTabPanel value={value} index={2}>
-        Item Three
+        <Form/>
       </CustomTabPanel>
     </Box>
   );

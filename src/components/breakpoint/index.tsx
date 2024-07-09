@@ -1,7 +1,8 @@
 import { Grid } from '@mui/material';
 import { Item } from '../../style';
 import {  useObserver } from 'rosma';
-import { observerOne, ObserverOneType } from '../../App';
+import { observerOne, ObserverOneType } from '../pages/cutting';
+// import { observerOne, ObserverOneType } from '../../App';
 
 type Props = {}
 
